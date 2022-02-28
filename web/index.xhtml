@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <style type="text/css">
+
+        #h_commandButtonid{
+            width: 80px;
+        }
+        #formulario1 {
+            width: 40%;
+        }
+
+    </style>
+    <h:head>
+        <title>Centauros Bank</title>
+    </h:head>
+    <h:body>
+        <h:form id="formulariol">
+            <p:fieldset legend="Crear Solicitud">
+                <p:panelGrid columns="2" cellpadding="7">                   
+
+                    <h:outputLabel for="identification" value="Cédula"/>
+                    <p:inputText id="identification" value="#{user.identification}" required="true"/>
+
+                    <h:outputLabel for="fullName" value="Nombre Completo"/>
+                    <p:inputText id="fullName" value="#{user.fullName}" required="true"/>
+
+                    <h:outputLabel for="address" value="Dirección"/>
+                    <p:inputText id="address" value="#{user.address}" required="true"/>
+                    
+                    <h:outputLabel for=" " value=" "/>
+                    <p:commandButton value="Enviar Solicitud" onclick="#{userController.saveUser()}" />
+                </p:panelGrid>
+            </p:fieldset>
+        </h:form>
+        <h:form>
+            <br></br>
+            <hr></hr>
+            <br></br>
+            <p:fieldset legend="Solicitudes">
+                <p:dataTable var="u" value="#{userController.userList()}" showGridlines="true">
+                    <p:column headerText="Cédula">
+                        <h:outputText value="#{u.identification}" />
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{u.fullName}" />
+                    </p:column>
+                    <p:column headerText="Dirección">
+                        <h:outputText value="#{u.address}" />
+                    </p:column>
+                    <p:column headerText="Reportado">
+                        <h:outputText value="#{flagDatacredito}" />
+                    </p:column>
+                    <p:column headerText="Actualizar" style="text-align: center">
+                        <p:commandButton value="Actualizar" action="#{userController.loadUser(u.id)}" />
+                    </p:column>
+                    <p:column headerText="Eliminar" style="text-align: center">
+                        <p:commandButton value="Eliminar" action="#{userController.deleteUser(u.id)}" />
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>  
+
+            
+        </h:form>
+    </h:body>
+</html>
+
